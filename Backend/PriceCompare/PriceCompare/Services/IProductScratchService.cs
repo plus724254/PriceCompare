@@ -8,6 +8,6 @@ namespace PriceCompare.Services
 {
     public interface IProductScratchService
     {
-        public List<ProductViewModel> GetProducts(string productKeyword);
+        public Task<List<ProductViewModel>> GetProducts(string productKeyword);
     }
 }

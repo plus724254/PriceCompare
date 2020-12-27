@@ -20,9 +20,9 @@ namespace PriceCompare.Controllers
         }
 
         [HttpGet]
-        public List<ProductViewModel> Get(string keyword)
+        public async Task<List<ProductViewModel>> Get(string keyword)
         {
-            return _productScratchService.GetProducts(keyword);
+            return await _productScratchService.GetProducts(keyword);
         }
     }
 }

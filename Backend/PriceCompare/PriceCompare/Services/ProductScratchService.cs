@@ -1,4 +1,6 @@
-﻿using PriceCompare.ViewModels;
+﻿using PriceCompare.Constants;
+using PriceCompare.Models.DTO;
+using PriceCompare.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +10,28 @@ namespace PriceCompare.Services
 {
     public class ProductScratchService : IProductScratchService
     {
-        public List<ProductViewModel> GetProducts(string productKeyword)
+        private readonly IWebScratchService _webScratchService;
+        public ProductScratchService(IWebScratchService webScratchService)
         {
+            _webScratchService = webScratchService;
+        }
+
+        public async Task<List<ProductViewModel>> GetProducts(string productKeyword)
+        {
+            var webHtmlInfos = await _webScratchService.GetWebHtmlDetailByKeyword(productKeyword);
+            var productViewModels = Enumerable.Empty<List<ProductViewModel>>();
+
+
+            foreach(var webHtmlInfo in webHtmlInfos)
+            {
+
+            }
+
+
+
+
+
+
             return new List<ProductViewModel>()
             {
                 new ProductViewModel()
