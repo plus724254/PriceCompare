@@ -1,0 +1,30 @@
+﻿using PriceCompare.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace PriceCompare.Services
+{
+    public class ProductScratchService : IProductScratchService
+    {
+        public List<ProductViewModel> GetProducts(string productKeyword)
+        {
+            return new List<ProductViewModel>()
+            {
+                new ProductViewModel()
+                {
+                    ImageUrl = "https://img1.momoshop.com.tw/goodsimg/0007/591/708/7591708_L.jpg?t=1608347766",
+                    PageUrl = "/goods/GoodsDetail.jsp?i_code=7591708&Area=search&mdiv=403&oid=1_1&cid=index&kw=wa500",
+                    Price = "29900",
+                },
+                new ProductViewModel()
+                {
+                    ImageUrl = "//b.ecimg.tw/items/DPADTPA900AOPJ7/000002_1591243426.jpg",
+                    PageUrl = "https://24h.pchome.com.tw/prod/DPADTP-A900AOPJ7",
+                    Price = "39900",
+                },
+            };
+        }
+    }
+}
