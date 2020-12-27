@@ -29,17 +29,15 @@ namespace PriceCompare.Services
         public async Task<List<WebHtmlDTO>> GetWebHtmlDetailByKeyword(string searchKeyword)
         {
             var webHtmls = new List<WebHtmlDTO>();
-
-            foreach (var webSite in WebSiteInfo.WebSites)
+            var tasks = WebSiteInfo.WebSites.Select(async x => new WebHtmlDTO()
             {
-                webHtmls.Add(new WebHtmlDTO()
-                {
-                    WebSiteName = webSite.Name,
-                    Html = await GetWebHtml(webSite.SearchPrefixUrl + searchKeyword)
-                });
-            }
+                WebSiteName = x.Name,
+                Html = await GetWebHtml(x.SearchPrefixUrl + searchKeyword),
+            });
 
-            return webHtmls;
+            var result = await Task.WhenAll(tasks);
+
+            return result.ToList();
         }
     }
 }
