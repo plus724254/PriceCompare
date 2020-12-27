@@ -9,6 +9,8 @@ namespace PriceCompare.ViewModels
     {
         public string ImageUrl { get; set; }
         public string PageUrl { get; set; }
+        public string Name { get; set; }
+        public string Detail { get; set; }
         public string Price { get; set; }
     }
 }
