@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Services.WebSiteHtmlProcess
 {
-    public class PChomeHtmlProcessService : IHtmlProcessService
+    public class PChomeDataAnalysisService : IDataAnalysisService
     {
-        public async Task<List<ProductViewModel>> AnalysisProductHtml(string html)
+        public async Task<List<ProductViewModel>> AnalysisProductData(string html)
         {
 
             var document = await HtmlAnalysisHelper.GetDocument(html);

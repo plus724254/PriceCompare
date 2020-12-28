@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Services.WebSiteHtmlProcess
 {
-    public class MoMoHtmlProcessService : IHtmlProcessService
+    public class MoMoDataAnalysisService : IDataAnalysisService
     {
-        public Task<List<ProductViewModel>> AnalysisProductHtml(string html)
+        public Task<List<ProductViewModel>> AnalysisProductData(string html)
         {
             throw new NotImplementedException();
         }

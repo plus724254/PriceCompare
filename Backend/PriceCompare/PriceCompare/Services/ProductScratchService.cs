@@ -18,11 +18,11 @@ namespace PriceCompare.Services
 
         public async Task<List<ProductViewModel>> GetProducts(string productKeyword)
         {
-            var webHtmlInfos = await _webScratchService.GetWebHtmlDetailByKeyword(productKeyword);
+            var webDataInfos = await _webScratchService.GetWebDataDetailByKeyword(productKeyword);
             var productViewModels = Enumerable.Empty<List<ProductViewModel>>();
 
 
-            foreach(var webHtmlInfo in webHtmlInfos)
+            foreach(var webDataInfo in webDataInfos)
             {
 
             }

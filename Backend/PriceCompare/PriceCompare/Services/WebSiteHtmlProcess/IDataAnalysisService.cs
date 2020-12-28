@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Services.WebSiteHtmlProcess
 {
-    public interface IHtmlProcessService
+    public interface IDataAnalysisService
     {
-        public Task<List<ProductViewModel>> AnalysisProductHtml(string html);
+        public Task<List<ProductViewModel>> AnalysisProductData(string html);
     }
 }

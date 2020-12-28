@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PriceCompare.Services;
+using PriceCompare.Services.WebSiteHtmlProcess;
 
 namespace PriceCompare
 {
@@ -29,6 +30,9 @@ namespace PriceCompare
             services.AddControllers();
 
             services.AddScoped<IProductScratchService, ProductScratchService>();
+            services.AddScoped<IWebScratchService, WebScratchService>();
+            services.AddScoped<IWebSiteDataAnalysisFactory, WebSiteDataAnalysisFactory>();
+            services.AddScoped<IWebSiteDataAnalysisService, WebSiteDataAnalysisService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,7 +10,7 @@ namespace PriceCompare.Services
 {
     public class WebScratchService : IWebScratchService
     {
-        public async Task<string> GetWebHtml(string url)
+        public async Task<string> GetWebData(string url)
         {
             using var httpClient = new HttpClient();
 
@@ -26,13 +26,13 @@ namespace PriceCompare.Services
             }
         }
 
-        public async Task<List<WebHtmlDTO>> GetWebHtmlDetailByKeyword(string searchKeyword)
+        public async Task<List<WebDataDTO>> GetWebDataDetailByKeyword(string searchKeyword)
         {
-            var webHtmls = new List<WebHtmlDTO>();
-            var tasks = WebSiteInfo.WebSites.Select(async x => new WebHtmlDTO()
+            var webHtmls = new List<WebDataDTO>();
+            var tasks = WebSiteInfo.WebSites.Select(async x => new WebDataDTO()
             {
                 WebSiteName = x.Name,
-                Html = await GetWebHtml(x.SearchPrefixUrl + searchKeyword),
+                Data = await GetWebData(x.SearchPrefixUrl + searchKeyword),
             });
 
             var result = await Task.WhenAll(tasks);

@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Services.WebSiteHtmlProcess
 {
-    public class WebSiteHtmlProcessFactory : IWebSiteHtmlProcessFactory
+    public class WebSiteDataAnalysisFactory : IWebSiteDataAnalysisFactory
     {
         private readonly Dictionary<WebSiteNames, Type> _htmlProcessMap = new Dictionary<WebSiteNames, Type>()
         {
-            { WebSiteNames.MoMo, typeof(MoMoHtmlProcessService) },
-            { WebSiteNames.PChome, typeof(PChomeHtmlProcessService) },
-            { WebSiteNames.Yahoo, typeof(YahooHtmlProcessServicecs) },
+            { WebSiteNames.MoMo, typeof(MoMoDataAnalysisService) },
+            { WebSiteNames.PChome, typeof(PChomeDataAnalysisService) },
+            { WebSiteNames.Yahoo, typeof(YahooDataAnalysisServicecs) },
         };
 
-        public IHtmlProcessService GetProcessService(WebSiteNames webSiteName)
+        public IDataAnalysisService GetAnalysisService(WebSiteNames webSiteName)
         {
             if (_htmlProcessMap.TryGetValue(webSiteName, out var htmlProcess))
             {
-                return (IHtmlProcessService)Activator.CreateInstance(htmlProcess);
+                return (IDataAnalysisService)Activator.CreateInstance(htmlProcess);
             }
             else
             {

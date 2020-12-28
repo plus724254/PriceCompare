@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Services.WebSiteHtmlProcess
 {
-    public class WebSiteHtmlProcessService : IWebSiteHtmlProcessService
+    public class WebSiteDataAnalysisService : IWebSiteDataAnalysisService
     {
-        private readonly IWebSiteHtmlProcessFactory _webSiteHtmlProcessFactory;
-        private IHtmlProcessService _htmlProcessService;
-        public WebSiteHtmlProcessService(IWebSiteHtmlProcessFactory webSiteHtmlProcessFactory)
+        private readonly IWebSiteDataAnalysisFactory _webSiteHtmlProcessFactory;
+        private IDataAnalysisService _htmlProcessService;
+        public WebSiteDataAnalysisService(IWebSiteDataAnalysisFactory webSiteHtmlProcessFactory)
         {
             _webSiteHtmlProcessFactory = webSiteHtmlProcessFactory;
         }
 
         public void SetHtmlProcess(WebSiteNames webSiteName)
         {
-            _htmlProcessService = _webSiteHtmlProcessFactory.GetProcessService(webSiteName);
+            _htmlProcessService = _webSiteHtmlProcessFactory.GetAnalysisService(webSiteName);
         }
 
         public async Task<List<ProductViewModel>> GetProducts(string html)
         {
-            return await _htmlProcessService.AnalysisProductHtml(html);
+            return await _htmlProcessService.AnalysisProductData(html);
         }
     }
 }

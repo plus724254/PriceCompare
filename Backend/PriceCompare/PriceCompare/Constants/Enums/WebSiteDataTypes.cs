@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PriceCompare.Services.WebSiteHtmlProcess
+namespace PriceCompare.Constants.Enums
 {
-    public interface IWebSiteDataAnalysisService
+    public enum WebSiteDataTypes
     {
+        Html,
+        Json,
     }
 }

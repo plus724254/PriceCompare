@@ -9,21 +9,24 @@ namespace PriceCompare.Constants
 {
     public static class WebSiteInfo
     {
-        public static WebSiteDTO[] WebSites = new WebSiteDTO[]
+        public static readonly WebSiteDTO[] WebSites = new WebSiteDTO[]
         {
             new WebSiteDTO()
             {
                 Name = nameof(WebSiteNames.MoMo),
-                SearchPrefixUrl = "https://www.momoshop.com.tw/search/searchShop.jsp?searchType=1&cateLevel=0&cateCode=&curPage=1&_isFuzzy=0&showType=chessboardType&keyword=",
+                DataType = WebSiteDataTypes.Html,
+                SearchPrefixUrl = "http://m.momoshop.com.tw/search.momo?couponSeq=&cpName=&searchType=1&cateLevel=-1&cateCode=-1&ent=k&_imgSH=fourCardStyle&searchKeyword=",
             },
             new WebSiteDTO()
             {
                 Name = nameof(WebSiteNames.PChome),
-                SearchPrefixUrl = "https://ecshweb.pchome.com.tw/search/v3.3/?q=",
+                DataType = WebSiteDataTypes.Json,
+                SearchPrefixUrl = "https://ecshweb.pchome.com.tw/search/v3.3/all/results?page=1&sort=sale/dc&q=",
             },
             new WebSiteDTO()
             {
                 Name = nameof(WebSiteNames.Yahoo),
+                DataType = WebSiteDataTypes.Html,
                 SearchPrefixUrl = "https://tw.buy.yahoo.com/search/product?p=",
             },
         };

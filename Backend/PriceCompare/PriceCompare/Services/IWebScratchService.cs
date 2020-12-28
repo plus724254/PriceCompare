@@ -8,7 +8,7 @@ namespace PriceCompare.Services
 {
     public interface IWebScratchService
     {
-        public Task<string> GetWebHtml(string url);
-        public Task<List<WebHtmlDTO>> GetWebHtmlDetailByKeyword(string searchKeyword);
+        public Task<string> GetWebData(string url);
+        public Task<List<WebDataDTO>> GetWebDataDetailByKeyword(string searchKeyword);
     }
 }

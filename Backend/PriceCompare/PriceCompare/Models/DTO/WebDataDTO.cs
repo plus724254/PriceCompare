@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Models.DTO
 {
-    public class WebHtmlDTO
+    public class WebDataDTO
     {
         public string WebSiteName { get; set; }
-        public string Html { get; set; }
+        public string Data { get; set; }
     }
 }
