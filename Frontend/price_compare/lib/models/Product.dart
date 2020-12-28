@@ -1,13 +1,15 @@
 class Product{
   String imageUrl;
   String pageUrl;
+  String webSiteName;
   String name;
   String detail;
-  String price;
+  int price;
 
   Product({
     this.imageUrl,
     this.pageUrl,
+    this.webSiteName,
     this.name,
     this.detail,
     this.price,
@@ -17,6 +19,7 @@ class Product{
     return Product(
       imageUrl: json['imageUrl'],
       pageUrl: json['pageUrl'],
+      webSiteName: json['webSiteName'],
       name: json['name'],
       detail: json['detail'],
       price: json['price'],

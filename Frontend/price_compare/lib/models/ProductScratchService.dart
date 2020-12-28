@@ -4,7 +4,7 @@ import 'dart:io';
 import 'ProductList.dart';
 
 class ProductScratchService{
-    final String _uri = "https://88668be36266.ngrok.io/api/Product?keyword=";
+    final String _uri = "http://aed91fcd1264.ngrok.io/api/Product?keyword=";
 
     Future<ProductList> getProductData (String keyword) async {
       var httpClient = new HttpClient();

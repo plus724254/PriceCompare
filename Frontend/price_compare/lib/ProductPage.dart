@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'models/Product.dart';
 import 'models/ProductList.dart';
 import 'models/ProductScratchService.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class ProductPage extends StatefulWidget{
@@ -59,35 +60,55 @@ class _ProductPageState extends State<ProductPage>{
       itemCount: _products.products.length,
       itemBuilder: (context, index){
         return Container(
-          decoration: BoxDecoration(           // 裝飾內裝元件
-                                          // 綠色背景
-            border: Border(bottom: BorderSide(width: 8, color: Colors.grey )), // 藍色邊框
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(width: 8, color: Colors.grey )),
           ),
           padding: const EdgeInsets.only(bottom: 10.0),
-          height: 200,
+          height: 120,
           width: double.infinity,
-          child: Row(
-            children: [
-              Expanded(
-                flex: 4,
-                child: Image.network(_products.products[index].imageUrl)
-              ),
-
-              Expanded(
-                flex: 6,
-                child: Column(
-                  children: [
-                    Text(_products.products[index].name),
-                    Text(_products.products[index].detail),
-                    Text(_products.products[index].price),
-                  ],
+          child: GestureDetector(
+            onTap: (){_lunchUrl(_products.products[index].pageUrl);},
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: Image.network(_products.products[index].imageUrl)
                 ),
-              ),
-
-            ],
-          ) 
-            
-            
+                Expanded(
+                  flex: 6,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 65,
+                        child: Text(_products.products[index].name, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                      ),
+                      Expanded(
+                        flex: 15,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 20.0),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(_products.products[index].webSiteName, style: TextStyle(fontSize: 12, color: Colors.grey)),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 20,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text("\$"+_products.products[index].price.toString(), style: TextStyle(fontSize: 18, color: Colors.red))
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ) 
+          ),
+          
         );
       }
     );
@@ -100,5 +121,13 @@ class _ProductPageState extends State<ProductPage>{
         this._products.products = products.products;
       }
     );
+  }
+
+  _lunchUrl(String url) async{
+     if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
