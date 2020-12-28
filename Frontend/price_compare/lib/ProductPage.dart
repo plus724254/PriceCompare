@@ -49,6 +49,7 @@ class _ProductPageState extends State<ProductPage>{
   Widget _barTitle(BuildContext context){
     return TextField(
       controller: _filter,
+      onSubmitted: (str) {_searchPressed();},
       decoration: InputDecoration(
         hintText: '商品名稱',
       ),

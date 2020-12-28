@@ -33,7 +33,7 @@ namespace PriceCompare.Services
 
             await Task.WhenAll(tasks);
 
-            return productViewModels;
+            return productViewModels.OrderBy(x=>x.Price).ToList();
 
 
             //return new List<ProductViewModel>()
