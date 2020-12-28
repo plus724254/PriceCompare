@@ -8,9 +8,9 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
 {
     public class YahooDataAnalysisServicecs : IDataAnalysisService
     {
-        public Task<List<ProductViewModel>> AnalysisProductData(string html)
+        public async Task<List<ProductViewModel>> AnalysisProductData(string html)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() => new List<ProductViewModel>());
         }
     }
 }

@@ -16,14 +16,14 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
             _webSiteHtmlProcessFactory = webSiteHtmlProcessFactory;
         }
 
-        public void SetHtmlProcess(WebSiteNames webSiteName)
+        public void SetDataAnalysisCategory(WebSiteNames webSiteName)
         {
             _htmlProcessService = _webSiteHtmlProcessFactory.GetAnalysisService(webSiteName);
         }
 
-        public async Task<List<ProductViewModel>> GetProducts(string html)
+        public async Task<List<ProductViewModel>> GetProducts(string webData)
         {
-            return await _htmlProcessService.AnalysisProductData(html);
+            return await _htmlProcessService.AnalysisProductData(webData);
         }
     }
 }

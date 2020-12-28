@@ -8,7 +8,7 @@ namespace PriceCompare.Models.DTO
 {
     public class WebDataDTO
     {
-        public string WebSiteName { get; set; }
+        public WebSiteNames WebSiteName { get; set; }
         public string Data { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
 {
     public interface IDataAnalysisService
     {
-        public Task<List<ProductViewModel>> AnalysisProductData(string html);
+        public Task<List<ProductViewModel>> AnalysisProductData(string webData);
     }
 }
