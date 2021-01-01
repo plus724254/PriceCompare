@@ -11,7 +11,7 @@ namespace PriceCompare.Services.SearchFilter
 {
     public class SearchFilterFactory : ISearchFilterFactory
     {
-        private readonly IPriceFilterFactory _priceFilterFactory;
+        private readonly IServiceProvider _serviceProvider;
         private readonly Dictionary<WebSiteNames, Type> _searchFilterMap = new Dictionary<WebSiteNames, Type>()
         {
             { WebSiteNames.MoMo, typeof(MoMoSearchFilterService) },
@@ -19,16 +19,16 @@ namespace PriceCompare.Services.SearchFilter
             { WebSiteNames.Yahoo, typeof(YahooSearchFilterService) },
         };
 
-        public SearchFilterFactory(IPriceFilterFactory priceFilterFactory)
+        public SearchFilterFactory(IServiceProvider serviceProvider)
         {
-            _priceFilterFactory = priceFilterFactory;
+            _serviceProvider = serviceProvider;
         }
 
         public ISearchFilterService GetSearhFilterService(WebSiteNames webSiteName)
         {
             if (_searchFilterMap.TryGetValue(webSiteName, out var searchFilter))
             {
-                return (ISearchFilterService)Activator.CreateInstance(searchFilter, _priceFilterFactory);
+                return (ISearchFilterService)ActivatorUtilities.CreateInstance(_serviceProvider, searchFilter);
             }
             else
             {
