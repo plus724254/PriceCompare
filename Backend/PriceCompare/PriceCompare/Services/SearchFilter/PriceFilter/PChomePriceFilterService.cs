@@ -16,7 +16,7 @@ namespace PriceCompare.Services.SearchFilter.PriceFilter
             }
             else
             {
-                return $"price{priceFilterDTO.MinPrice ?? 0}-{priceFilterDTO.MaxPrice ?? int.MaxValue}";
+                return $"&price={priceFilterDTO.MinPrice ?? 0}-{priceFilterDTO.MaxPrice ?? int.MaxValue}";
             }
         }
     }
