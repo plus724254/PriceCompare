@@ -18,7 +18,7 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
                 .QuerySelectorAll(".gridList > .BaseGridItem__grid___2wuJ7")
                 .Select(x => new ProductViewModel()
                 {
-                    ImageUrl = x.QuerySelector(".SquareFence_wrap_3jTo2").GetAttribute("src"),
+                    ImageUrl = x.QuerySelector(".SquareFence_wrap_3jTo2 > img").GetAttribute("src"),
                     PageUrl = x.QuerySelector("a").GetAttribute("href"),
                     WebSiteName = nameof(WebSiteNames.Yahoo),
                     Name = x.QuerySelector(".BaseGridItem__title___2HWui").InnerHtml?.Trim(),
