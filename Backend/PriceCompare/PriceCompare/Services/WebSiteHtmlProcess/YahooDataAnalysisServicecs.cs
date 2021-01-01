@@ -1,4 +1,5 @@
-﻿using PriceCompare.Constants.Enums;
+﻿using AngleSharp.Dom;
+using PriceCompare.Constants.Enums;
 using PriceCompare.Helpers;
 using PriceCompare.ViewModels;
 using System;
@@ -25,9 +26,7 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
                         WebSiteName = nameof(WebSiteNames.Yahoo),
                         Name = x.QuerySelector(".BaseGridItem__title___2HWui").InnerHtml?.Trim(),
                         Detail = string.Empty,
-                        Price = WebDataConvertHelper.WebPriceToNumber(x.QuerySelector(".BaseGridItem__price___31jkj").InnerHtml) == 0 ?
-                            WebDataConvertHelper.WebPriceToNumber(x.QuerySelector(".BaseGridItem__price___31jkj > em").InnerHtml)
-                            : 0,
+                        Price = GetPrice(x),
                     })
                     .ToList();
 
@@ -36,6 +35,20 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
             catch
             {
                 return new List<ProductViewModel>();
+            }
+        }
+
+        private int GetPrice(IElement element)
+        {
+            var scratchPrice = WebDataConvertHelper.WebPriceToNumber(element.QuerySelector(".BaseGridItem__price___31jkj").InnerHtml);
+
+            if(scratchPrice != 0)
+            {
+                return scratchPrice;
+            }
+            else
+            {
+                return WebDataConvertHelper.WebPriceToNumber(element.QuerySelector(".BaseGridItem__price___31jkj > em").InnerHtml);
             }
         }
     }
