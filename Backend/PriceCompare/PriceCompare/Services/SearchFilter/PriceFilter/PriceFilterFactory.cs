@@ -11,7 +11,7 @@ namespace PriceCompare.Services.SearchFilter.PriceFilter
         private readonly Dictionary<WebSiteNames, Type> _priceFilterMap = new Dictionary<WebSiteNames, Type>()
         {
             { WebSiteNames.MoMo, typeof(CommomPriceFilterService) },
-            { WebSiteNames.PChome, typeof(CommomPriceFilterService) },
+            { WebSiteNames.PChome, typeof(PChomePriceFilterService) },
             { WebSiteNames.Yahoo, typeof(CommomPriceFilterService) },
         };
 

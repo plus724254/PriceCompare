@@ -25,7 +25,9 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
                         WebSiteName = nameof(WebSiteNames.Yahoo),
                         Name = x.QuerySelector(".BaseGridItem__title___2HWui").InnerHtml?.Trim(),
                         Detail = string.Empty,
-                        Price = WebDataConvertHelper.WebPriceToNumber(x.QuerySelector(".BaseGridItem__price___31jkj").InnerHtml),
+                        Price = WebDataConvertHelper.WebPriceToNumber(x.QuerySelector(".BaseGridItem__price___31jkj").InnerHtml) == 0 ?
+                            WebDataConvertHelper.WebPriceToNumber(x.QuerySelector(".BaseGridItem__price___31jkj > em").InnerHtml)
+                            : 0,
                     })
                     .ToList();
 
