@@ -10,7 +10,7 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
 {
     public class MoMoDataAnalysisService : IDataAnalysisService
     {
-        private const string _pagePrefix = "http://m.momoshop.com.tw/";
+        private const string _pagePrefix = "https://m.momoshop.com.tw";
         public async Task<List<ProductViewModel>> AnalysisProductData(string webData)
         {
             try
@@ -22,7 +22,7 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
                     .Select(x => new ProductViewModel()
                     {
                         ImageUrl = x.QuerySelector(".prdImgWrap > img").GetAttribute("src"),
-                        PageUrl = x.QuerySelector("a").GetAttribute("href"),
+                        PageUrl = $"{_pagePrefix}{x.QuerySelector("a").GetAttribute("href")}",
                         WebSiteName = nameof(WebSiteNames.MoMo),
                         Name = x.QuerySelector(".prdInfoWrap > .prdName").InnerHtml?.Trim(),
                         Detail = string.Empty,
