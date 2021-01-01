@@ -16,11 +16,14 @@ class ProductPage extends StatefulWidget{
 
 class _ProductPageState extends State<ProductPage>{
   final TextEditingController _filter = TextEditingController();
-  
+  final TextEditingController _minPricefilter = TextEditingController();
+  final TextEditingController _maxPricefilter = TextEditingController();
+
+  var _appBarBackgroundColor = Colors.teal[700];
+  var _filterBackgroundColor = Colors.teal[400];
   var _products = ProductList();
-
   var _searchIcon = Icon(Icons.search);
-
+  var _filterIcon = Icon(Icons.done_outline);
 
   _ProductPageState() {
     _products.products = List<Product>();
@@ -30,17 +33,26 @@ class _ProductPageState extends State<ProductPage>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: _buildBar(context),
-      body: _buildList(context),
+      // body: _buildList(context),
+      body: Column(
+        children:[
+          _buildFilter(context),
+          Expanded(
+            child: _buildList(context)
+          ),
+        ]
+      ),
 
     );
   }
 
   Widget _buildBar(BuildContext context){
     return AppBar(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: _appBarBackgroundColor,
       title: _barTitle(context),
       leading: IconButton(
         icon: _searchIcon, 
+        splashColor: Colors.white,
         onPressed: () async {_searchPressed();},
       )
     );
@@ -52,7 +64,81 @@ class _ProductPageState extends State<ProductPage>{
       onSubmitted: (str) {_searchPressed();},
       decoration: InputDecoration(
         hintText: '商品名稱',
+        //border: InputBorder.none,
       ),
+    );
+  }
+
+  Widget _buildFilter(BuildContext context){
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 0 , horizontal: 50.0),
+      width: MediaQuery.of(context).size.width,
+      height: 50,
+      color: _filterBackgroundColor,
+      child: Row(
+        children: [
+          Text('價格範圍'),
+          _buildMinPriceFilter(context),
+          Text('-'),
+          _buildMaxPriceFilter(context),
+          Material(
+            color: _filterBackgroundColor,
+            child: IconButton(
+              icon: _filterIcon, 
+              splashColor: Colors.white,
+              
+              onPressed: () async {_searchPressed();},
+            ),
+          ),
+        ],
+      )
+    );
+  }
+
+  Widget _buildMinPriceFilter(BuildContext context){
+    return Container(
+      width: 90,
+      height: 30,
+      padding: EdgeInsets.symmetric(vertical: 0 , horizontal: 10.0),
+      child: TextField(
+        
+        style: TextStyle(
+          fontSize: 15.0,
+        ),
+        controller: _minPricefilter,
+        decoration: InputDecoration(
+          hintText: '最低價',
+          border: InputBorder.none,
+          fillColor: Colors.white, 
+          filled: true,
+          isDense: true,
+        ),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: new BorderRadius.all(new Radius.circular(1000.0)),
+      ),
+    );
+  }
+
+  Widget _buildMaxPriceFilter(BuildContext context){
+    return Container(
+      width: 90,
+      height: 30,
+      padding: EdgeInsets.symmetric(vertical: 0 , horizontal: 10.0),
+      child: TextField(
+        
+        style: TextStyle(
+          fontSize: 15.0,
+        ),
+        controller: _maxPricefilter,
+        decoration: InputDecoration(
+          hintText: '最高價',
+          border: InputBorder.none,
+          fillColor: Colors.white, 
+          filled: true,
+          isDense: true,   
+        ),
+      )
     );
   }
 
@@ -117,7 +203,12 @@ class _ProductPageState extends State<ProductPage>{
 
 
   _searchPressed() async {
-    var products = await ProductScratchService().getProductData(_filter.text);
+      setState(() {
+        this._products.products = new List<Product>();
+      }
+    );
+
+    var products = await ProductScratchService().getProductData(_filter.text, _minPricefilter.text, _maxPricefilter.text);
     setState(() {
         this._products.products = products.products;
       }
