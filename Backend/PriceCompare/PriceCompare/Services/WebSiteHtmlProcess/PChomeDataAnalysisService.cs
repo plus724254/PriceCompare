@@ -16,18 +16,25 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
         private const string _pagePrefix = "https://24h.pchome.com.tw/prod/";
         public async Task<List<ProductViewModel>> AnalysisProductData(string webData)
         {
-            var pchomeData = await Task.Run(() => JsonSerializer.Deserialize<PChomeDataDTO>(webData));
-
-            return pchomeData.prods.Select(x => new ProductViewModel()
+            try
             {
-                ImageUrl = $"{_imagePrefix}{x.picB}",
-                PageUrl = $"{_pagePrefix}{x.Id}",
-                WebSiteName = nameof(WebSiteNames.PChome),
-                Name = x.name,
-                Detail = x.describe.Length > 20 ? x.describe.Substring(0,20) : x.describe,
-                Price = x.price,
-            })
-            .ToList();
+                var pchomeData = await Task.Run(() => JsonSerializer.Deserialize<PChomeDataDTO>(webData));
+
+                return pchomeData.prods.Select(x => new ProductViewModel()
+                {
+                    ImageUrl = $"{_imagePrefix}{x.picB}",
+                    PageUrl = $"{_pagePrefix}{x.Id}",
+                    WebSiteName = nameof(WebSiteNames.PChome),
+                    Name = x.name,
+                    Detail = x.describe.Length > 20 ? x.describe.Substring(0, 20) : x.describe,
+                    Price = x.price,
+                })
+                .ToList();
+            }
+            catch
+            {
+                return new List<ProductViewModel>();
+            }
         }
     }
 }

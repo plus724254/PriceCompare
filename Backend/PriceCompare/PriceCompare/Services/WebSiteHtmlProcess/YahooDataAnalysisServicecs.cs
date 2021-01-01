@@ -12,22 +12,29 @@ namespace PriceCompare.Services.WebSiteHtmlProcess
     {
         public async Task<List<ProductViewModel>> AnalysisProductData(string webData)
         {
-            var document = await HtmlAnalysisHelper.GetDocument(webData);
+            try
+            {
+                var document = await HtmlAnalysisHelper.GetDocument(webData);
 
-            var products = document
-                .QuerySelectorAll(".gridList > .BaseGridItem__grid___2wuJ7")
-                .Select(x => new ProductViewModel()
-                {
-                    ImageUrl = x.QuerySelector(".SquareFence_wrap_3jTo2 > img").GetAttribute("src"),
-                    PageUrl = x.QuerySelector("a").GetAttribute("href"),
-                    WebSiteName = nameof(WebSiteNames.Yahoo),
-                    Name = x.QuerySelector(".BaseGridItem__title___2HWui").InnerHtml?.Trim(),
-                    Detail = string.Empty,
-                    Price = WebDataConvertHelper.WebPriceToNumber(x.QuerySelector(".BaseGridItem__price___31jkj").InnerHtml),
-                })
-                .ToList();
+                var products = document
+                    .QuerySelectorAll(".gridList > .BaseGridItem__grid___2wuJ7")
+                    .Select(x => new ProductViewModel()
+                    {
+                        ImageUrl = x.QuerySelector(".SquareImg_img_2gAcq").GetAttribute("srcset")?.Split(" ")[0],
+                        PageUrl = x.QuerySelector("a").GetAttribute("href"),
+                        WebSiteName = nameof(WebSiteNames.Yahoo),
+                        Name = x.QuerySelector(".BaseGridItem__title___2HWui").InnerHtml?.Trim(),
+                        Detail = string.Empty,
+                        Price = WebDataConvertHelper.WebPriceToNumber(x.QuerySelector(".BaseGridItem__price___31jkj").InnerHtml),
+                    })
+                    .ToList();
 
-            return products;
+                return products;
+            }
+            catch
+            {
+                return new List<ProductViewModel>();
+            }
         }
     }
 }
