@@ -1,4 +1,5 @@
-﻿using PriceCompare.ViewModels;
+﻿using PriceCompare.Models;
+using PriceCompare.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace PriceCompare.Services
 {
     public interface IProductScratchService
     {
-        public Task<List<ProductViewModel>> GetProducts(string productKeyword);
+        public Task<List<ProductViewModel>> GetProducts(SearchFilterModel searchFilter);
     }
 }

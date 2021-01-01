@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PriceCompare.Models;
 using PriceCompare.Services;
 using PriceCompare.ViewModels;
 
@@ -20,9 +21,14 @@ namespace PriceCompare.Controllers
         }
 
         [HttpGet]
-        public async Task<List<ProductViewModel>> Get(string keyword)
+        public async Task<List<ProductViewModel>> Get(string keyword, int? minPrice, int? maxPrice)
         {
-            return await _productScratchService.GetProducts(keyword);
+            return await _productScratchService.GetProducts(new SearchFilterModel 
+            { 
+                Keyword = keyword, 
+                MinPrice = minPrice, 
+                MaxPrice = maxPrice 
+            });
         }
     }
 }

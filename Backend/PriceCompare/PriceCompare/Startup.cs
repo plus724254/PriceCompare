@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PriceCompare.Services;
+using PriceCompare.Services.SearchFilter;
+using PriceCompare.Services.SearchFilter.PriceFilter;
 using PriceCompare.Services.WebSiteHtmlProcess;
 
 namespace PriceCompare
@@ -29,7 +31,9 @@ namespace PriceCompare
         {
             services.AddControllers();
 
+            services.AddScoped<IPriceFilterFactory, PriceFilterFactory>();
             services.AddScoped<IProductScratchService, ProductScratchService>();
+            services.AddScoped<ISearchFilterFactory, SearchFilterFactory>();
             services.AddScoped<IWebScratchService, WebScratchService>();
             services.AddScoped<IWebSiteDataAnalysisFactory, WebSiteDataAnalysisFactory>();
             services.AddScoped<IWebSiteDataAnalysisService, WebSiteDataAnalysisService>();
