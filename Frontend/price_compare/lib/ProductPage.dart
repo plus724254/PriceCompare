@@ -71,7 +71,7 @@ class _ProductPageState extends State<ProductPage>{
 
   Widget _buildFilter(BuildContext context){
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 0 , horizontal: 50.0),
+      padding: EdgeInsets.symmetric(vertical: 0 , horizontal: 30.0),
       width: MediaQuery.of(context).size.width,
       height: 50,
       color: _filterBackgroundColor,
@@ -97,13 +97,13 @@ class _ProductPageState extends State<ProductPage>{
 
   Widget _buildMinPriceFilter(BuildContext context){
     return Container(
-      width: 90,
+      width: 105,
       height: 30,
       padding: EdgeInsets.symmetric(vertical: 0 , horizontal: 10.0),
       child: TextField(
         
         style: TextStyle(
-          fontSize: 15.0,
+          fontSize: 14.0,
         ),
         controller: _minPricefilter,
         decoration: InputDecoration(
@@ -122,13 +122,13 @@ class _ProductPageState extends State<ProductPage>{
 
   Widget _buildMaxPriceFilter(BuildContext context){
     return Container(
-      width: 90,
+      width: 105,
       height: 30,
       padding: EdgeInsets.symmetric(vertical: 0 , horizontal: 10.0),
       child: TextField(
         
         style: TextStyle(
-          fontSize: 15.0,
+          fontSize: 14.0,
         ),
         controller: _maxPricefilter,
         decoration: InputDecoration(
