@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PriceCompare.Constants.Enums;
 
-namespace PriceCompare.Services.WebSiteHtmlProcess
+namespace PriceCompare.Services.WebSiteDataAnalysis
 {
     public class PChomeDataAnalysisService : IDataAnalysisService
     {

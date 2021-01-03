@@ -14,7 +14,7 @@ using PriceCompare.Services;
 using PriceCompare.Services.Scratch;
 using PriceCompare.Services.SearchFilter;
 using PriceCompare.Services.SearchFilter.PriceFilter;
-using PriceCompare.Services.WebSiteHtmlProcess;
+using PriceCompare.Services.WebSiteDataAnalysis;
 
 namespace PriceCompare
 {

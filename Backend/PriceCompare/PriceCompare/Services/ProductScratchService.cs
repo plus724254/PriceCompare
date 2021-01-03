@@ -1,7 +1,7 @@
 ﻿using PriceCompare.Constants;
 using PriceCompare.Models;
 using PriceCompare.Models.DTO;
-using PriceCompare.Services.WebSiteHtmlProcess;
+using PriceCompare.Services.WebSiteDataAnalysis;
 using PriceCompare.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,6 @@ namespace PriceCompare.Services
         {
             var webDataInfos = await _webScratchService.GetWebDataDetailByFilter(searchFilter);
             var productViewModels = new List<ProductViewModel>();
-
 
             var tasks = webDataInfos.Select(async x => 
             {

@@ -17,7 +17,7 @@ namespace PriceCompare.Services.Scratch
             });
 
             using var page = await browser.NewPageAsync();
-            await page.GoToAsync(url);
+            await page.GoToAsync(url, WaitUntilNavigation.DOMContentLoaded);
 
             return await page.GetContentAsync();   
         }
