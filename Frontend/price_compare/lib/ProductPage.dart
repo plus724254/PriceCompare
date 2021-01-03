@@ -25,6 +25,8 @@ class _ProductPageState extends State<ProductPage>{
   var _searchIcon = Icon(Icons.search);
   var _filterIcon = Icon(Icons.done_outline);
 
+  var _isHardSearchCheck = false;
+
   _ProductPageState() {
     _products.products = List<Product>();
   }
@@ -59,13 +61,41 @@ class _ProductPageState extends State<ProductPage>{
   }
 
   Widget _barTitle(BuildContext context){
-    return TextField(
-      controller: _filter,
-      onSubmitted: (str) {_searchPressed();},
-      decoration: InputDecoration(
-        hintText: '商品名稱',
-        //border: InputBorder.none,
-      ),
+    return Row(
+      children: [
+        Expanded(
+          flex: 50,
+          child: TextField(
+            controller: _filter,
+            onSubmitted: (str) {_searchPressed();},
+            decoration: InputDecoration(
+              hintText: '商品名稱',
+              //border: InputBorder.none,
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 5,
+          child: Container(),
+        ),
+        Expanded(
+          flex: 45,
+          child: Row(
+              children: [
+                Text(
+                  "精準搜尋",
+                  style: TextStyle(fontSize: 14),
+                ),
+                Switch(
+                  value: _isHardSearchCheck,
+                  onChanged: _hardSearchChanged,
+                  activeColor: Colors.yellowAccent,
+                ),
+
+              ]
+          ),
+        ),
+      ],
     );
   }
 
@@ -86,7 +116,6 @@ class _ProductPageState extends State<ProductPage>{
             child: IconButton(
               icon: _filterIcon, 
               splashColor: Colors.white,
-              
               onPressed: () async {_searchPressed();},
             ),
           ),
@@ -208,7 +237,7 @@ class _ProductPageState extends State<ProductPage>{
       }
     );
 
-    var products = await ProductScratchService().getProductData(_filter.text, _minPricefilter.text, _maxPricefilter.text);
+    var products = await ProductScratchService().getProductData(_filter.text, _minPricefilter.text, _maxPricefilter.text,_isHardSearchCheck);
     setState(() {
         this._products.products = products.products;
       }
@@ -221,5 +250,11 @@ class _ProductPageState extends State<ProductPage>{
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  _hardSearchChanged(isHardSearchCheck) {
+    setState((){
+      _isHardSearchCheck = isHardSearchCheck;
+    });
   }
 }
