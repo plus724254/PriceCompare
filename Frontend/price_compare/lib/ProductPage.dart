@@ -4,6 +4,7 @@ import 'models/Product.dart';
 import 'models/ProductList.dart';
 import 'models/ProductScratchService.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:loading_animations/loading_animations.dart';
 
 
 class ProductPage extends StatefulWidget{
@@ -26,6 +27,7 @@ class _ProductPageState extends State<ProductPage>{
   var _filterIcon = Icon(Icons.done_outline);
 
   var _isHardSearchCheck = false;
+  var _isLoadingAnimationDisplay = false;
 
   _ProductPageState() {
     _products.products = List<Product>();
@@ -35,10 +37,10 @@ class _ProductPageState extends State<ProductPage>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: _buildBar(context),
-      // body: _buildList(context),
       body: Column(
         children:[
           _buildFilter(context),
+          _buildLoadAnimation(context),
           Expanded(
             child: _buildList(context)
           ),
@@ -97,6 +99,26 @@ class _ProductPageState extends State<ProductPage>{
         ),
       ],
     );
+  }
+
+  Widget _buildLoadAnimation(BuildContext context){
+    var content;
+    if(_isLoadingAnimationDisplay)
+    {
+        content = Container(
+          padding: EdgeInsets.symmetric(vertical: 50 , horizontal: 0),
+          child: LoadingRotating.square(
+            borderColor: Colors.blueGrey,
+            size: 50.0
+          )
+        );
+    }
+    else
+    {
+        content = Container(height: 0,width: 0);
+    }
+
+    return content;
   }
 
   Widget _buildFilter(BuildContext context){
@@ -172,7 +194,8 @@ class _ProductPageState extends State<ProductPage>{
   }
 
   Widget _buildList(BuildContext context){
-    return ListView.builder(
+    return 
+    ListView.builder(
       itemCount: _products.products.length,
       itemBuilder: (context, index){
         return Container(
@@ -234,12 +257,14 @@ class _ProductPageState extends State<ProductPage>{
   _searchPressed() async {
       setState(() {
         this._products.products = new List<Product>();
+        _isLoadingAnimationDisplay = true;
       }
     );
 
     var products = await ProductScratchService().getProductData(_filter.text, _minPricefilter.text, _maxPricefilter.text,_isHardSearchCheck);
     setState(() {
         this._products.products = products.products;
+        _isLoadingAnimationDisplay = false;
       }
     );
   }
