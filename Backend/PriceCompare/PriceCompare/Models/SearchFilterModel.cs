@@ -10,5 +10,6 @@ namespace PriceCompare.Models
         public string Keyword { get; set; }
         public int? MinPrice { get; set; }
         public int? MaxPrice { get; set; }
+        public bool IsHardSearch { get; set; }
     }
 }

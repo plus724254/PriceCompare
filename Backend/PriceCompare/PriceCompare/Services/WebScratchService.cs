@@ -28,7 +28,9 @@ namespace PriceCompare.Services
             var tasks = WebSiteInfo.WebSites.Select(async x => new WebDataDTO()
             {
                 WebSiteName = x.Name,
-                Data = await _pageScratchFactory.GetPageScratchService(x.PageType).GetWebData(GetWebUrl(x.Name, searchFilter))
+                Data = await _pageScratchFactory
+                    .GetPageScratchService(searchFilter.IsHardSearch? x.PageType : WebSitePageTypes.StaticPage)
+                    .GetWebData(GetWebUrl(x.Name, searchFilter))
             });
 
             var result = await Task.WhenAll(tasks);

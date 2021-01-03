@@ -21,13 +21,14 @@ namespace PriceCompare.Controllers
         }
 
         [HttpGet]
-        public async Task<List<ProductViewModel>> Get(string keyword, int? minPrice, int? maxPrice)
+        public async Task<List<ProductViewModel>> Get(string keyword, int? minPrice, int? maxPrice, bool isHardSearch)
         {
             return await _productScratchService.GetProducts(new SearchFilterModel 
             { 
                 Keyword = keyword, 
                 MinPrice = minPrice, 
-                MaxPrice = maxPrice 
+                MaxPrice = maxPrice,
+                IsHardSearch = isHardSearch
             });
         }
     }
