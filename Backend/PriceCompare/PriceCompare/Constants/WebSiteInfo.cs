@@ -15,16 +15,19 @@ namespace PriceCompare.Constants
             {
                 Name = WebSiteNames.MoMo,
                 DataType = WebSiteDataTypes.Html,
+                PageType = WebSitePageTypes.StaticPage,
             },
             new WebSiteDTO()
             {
                 Name = WebSiteNames.PChome,
                 DataType = WebSiteDataTypes.Json,
+                PageType = WebSitePageTypes.StaticPage,
             },
             new WebSiteDTO()
             {
                 Name = WebSiteNames.Yahoo,
                 DataType = WebSiteDataTypes.Html,
+                PageType = WebSitePageTypes.StaticPage,
             },
         };
     }

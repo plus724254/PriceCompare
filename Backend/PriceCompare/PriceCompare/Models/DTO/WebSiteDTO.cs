@@ -10,6 +10,7 @@ namespace PriceCompare.Models.DTO
     {
         public WebSiteNames Name { get; set; }
         public WebSiteDataTypes DataType { get; set; }
+        public WebSitePageTypes PageType { get; set; }
         public string SearchPrefixUrl { get; set; }
         public string MinPriceText { get; set; }
         public string MaxPriceText { get; set; }
