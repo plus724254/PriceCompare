@@ -10,7 +10,7 @@ namespace PriceCompare.Services.Scratch
     {
         public async Task<string> GetWebData(string url)
         {
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+            //await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
             using var browser = await Puppeteer.ConnectAsync(new ConnectOptions()
             {
                 BrowserWSEndpoint = $"wss://chrome.browserless.io?token=7220fb88-0ef3-48d0-941d-055b19dda12b&blockAds"
