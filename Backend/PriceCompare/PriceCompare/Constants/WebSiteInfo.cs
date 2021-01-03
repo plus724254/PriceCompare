@@ -15,7 +15,7 @@ namespace PriceCompare.Constants
             {
                 Name = WebSiteNames.MoMo,
                 DataType = WebSiteDataTypes.Html,
-                PageType = WebSitePageTypes.StaticPage,
+                PageType = WebSitePageTypes.DynamicPage,
             },
             new WebSiteDTO()
             {
