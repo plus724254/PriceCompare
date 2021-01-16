@@ -21,7 +21,7 @@
 
 # 安装
 
-開啟Flutter前端專案，輸入一下指令建置APK檔案
+開啟Flutter前端專案，輸入下方指令建置APK檔案
 ```console
 flutter build apk
 ```
