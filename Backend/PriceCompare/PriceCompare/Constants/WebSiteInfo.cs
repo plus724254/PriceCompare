@@ -9,7 +9,7 @@ namespace PriceCompare.Constants
 {
     public static class WebSiteInfo
     {
-        public static readonly WebSiteDTO[] WebSites = new WebSiteDTO[]
+        public static readonly List<WebSiteDTO> WebSites = new List<WebSiteDTO>
         {
             new WebSiteDTO()
             {

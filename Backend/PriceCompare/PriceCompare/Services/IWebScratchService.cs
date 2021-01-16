@@ -9,6 +9,6 @@ namespace PriceCompare.Services
 {
     public interface IWebScratchService
     {
-        public Task<List<WebDataDTO>> GetWebDataDetailByFilter(SearchFilterModel searchFilter);
+        public Task<WebDataDTO> GetWebDataDetailByFilter(SearchFilterModel searchFilter, WebSiteDTO webSiteInfo);
     }
 }

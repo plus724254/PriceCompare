@@ -22,18 +22,23 @@ namespace PriceCompare.Services
 
         public async Task<List<ProductViewModel>> GetProducts(SearchFilterModel searchFilter)
         {
-            var webDataInfos = await _webScratchService.GetWebDataDetailByFilter(searchFilter);
             var productViewModels = new List<ProductViewModel>();
-
-            var tasks = webDataInfos.Select(async x => 
+            var tasks = WebSiteInfo.WebSites.Select(async x =>
             {
-                _webSiteDataAnalysisService.SetDataAnalysisCategory(x.WebSiteName);
-                productViewModels.AddRange(await _webSiteDataAnalysisService.GetProducts(x.Data));
+                productViewModels.AddRange(await GetProductsBySingleWebSite(searchFilter, x));
             });
 
             await Task.WhenAll(tasks);
 
             return productViewModels.OrderBy(x=>x.Price).ToList();
+        }
+
+        private async Task<List<ProductViewModel>> GetProductsBySingleWebSite(SearchFilterModel searchFilter, WebSiteDTO webSiteDTO)
+        {
+            var webData = await _webScratchService.GetWebDataDetailByFilter(searchFilter, webSiteDTO);
+            _webSiteDataAnalysisService.SetDataAnalysisCategory(webData.WebSiteName);
+
+            return await _webSiteDataAnalysisService.GetProducts(webData.Data);
         }
     }
 }

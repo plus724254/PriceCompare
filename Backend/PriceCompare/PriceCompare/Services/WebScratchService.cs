@@ -22,20 +22,15 @@ namespace PriceCompare.Services
             _searchFilterFactory = searchFilterFactory;
         }
 
-        public async Task<List<WebDataDTO>> GetWebDataDetailByFilter(SearchFilterModel searchFilter)
+        public async Task<WebDataDTO> GetWebDataDetailByFilter(SearchFilterModel searchFilter, WebSiteDTO webSiteInfo)
         {
-            var webHtmls = new List<WebDataDTO>();
-            var tasks = WebSiteInfo.WebSites.Select(async x => new WebDataDTO()
+            return new WebDataDTO()
             {
-                WebSiteName = x.Name,
+                WebSiteName = webSiteInfo.Name,
                 Data = await _pageScratchFactory
-                    .GetPageScratchService(searchFilter.IsHardSearch? x.PageType : WebSitePageTypes.StaticPage)
-                    .GetWebData(GetWebUrl(x.Name, searchFilter))
-            });
-
-            var result = await Task.WhenAll(tasks);
-            
-            return result.ToList();
+                    .GetPageScratchService(searchFilter.IsHardSearch ? webSiteInfo.PageType : WebSitePageTypes.StaticPage)
+                    .GetWebData(GetWebUrl(webSiteInfo.Name, searchFilter))
+            };
         }
 
         private string GetWebUrl(WebSiteNames webSiteName, SearchFilterModel searchFilter)
