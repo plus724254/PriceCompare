@@ -11,7 +11,7 @@ namespace PriceCompare.Services.SearchFilter
 {
     public class MoMoSearchFilterService : ISearchFilterService
     {
-        private const string _searchPrefixUrl = "http://m.momoshop.com.tw/search.momo?couponSeq=&cpName=&searchType=1&cateLevel=-1&cateCode=-1&ent=k&_imgSH=fourCardStyle&searchKeyword=";
+        private const string _searchPrefixUrl = "https://m.momoshop.com.tw/search.momo?couponSeq=&cpName=&searchType=1&cateLevel=-1&cateCode=-1&ent=k&_imgSH=fourCardStyle&searchKeyword=";
         private const string _minPriceText = "_advPriceS";
         private const string _maxPriceText = "_advPriceE";
 
