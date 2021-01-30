@@ -1,9 +1,4 @@
-﻿using System;
-using PriceCompare.Constants.Enums;
-using PriceCompare.Services.Scratch;
-using PriceCompare.Services.SearchFilter;
-using PriceCompare.Services.SearchFilter.PriceFilter;
-using PriceCompare.Services.WebSiteDataAnalysis;
+﻿using PriceCompare.Constants.Enums;
 
 namespace PriceCompare.Constants.WebSiteParameters
 {
@@ -12,10 +7,10 @@ namespace PriceCompare.Constants.WebSiteParameters
         public PChomeParameters()
         {
             WebSiteName = WebSiteNames.PChome;
-            PageScratchService = new StaticPageScratchService();
-            PriceFilterService = new PChomePriceFilterService();
-            SearchFilterService = new PChomeSearchFilterService();
-            DataAnalysisService = new PChomeDataAnalysisService();
+            WebSitePageType = WebSitePageTypes.StaticPage;
+            PriceFilterType = PriceFilterTypes.Exclusive;
+            SearchFilterType = SearchFilterTypes.Exclusive;
+            DataAnalysisType = DataAnalysisTypes.Exclusive;
         }
     }
 }

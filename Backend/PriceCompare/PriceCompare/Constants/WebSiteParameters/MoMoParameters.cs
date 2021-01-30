@@ -11,10 +11,10 @@ namespace PriceCompare.Constants.WebSiteParameters
         public MoMoParameters()
         {
             WebSiteName = WebSiteNames.MoMo;
-            PageScratchService = new DynamicPageScratchService();
-            PriceFilterService = new CommomPriceFilterService();
-            SearchFilterService = new MoMoSearchFilterService();
-            DataAnalysisService = new MoMoDataAnalysisService();
+            WebSitePageType = WebSitePageTypes.DynamicPage;
+            PriceFilterType = PriceFilterTypes.Common;
+            SearchFilterType = SearchFilterTypes.Exclusive;
+            DataAnalysisType = DataAnalysisTypes.Exclusive;
         }
     }
 }

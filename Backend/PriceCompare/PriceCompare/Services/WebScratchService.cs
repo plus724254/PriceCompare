@@ -1,4 +1,5 @@
-﻿using PriceCompare.Constants.WebSiteParameters;
+﻿using PriceCompare.Common;
+using PriceCompare.Constants.WebSiteParameters;
 using PriceCompare.Models;
 using PriceCompare.Models.DTO;
 using PriceCompare.Services.Scratch;
@@ -8,23 +9,23 @@ namespace PriceCompare.Services
 {
     public class WebScratchService : IWebScratchService
     {
-        public async Task<WebDataDTO> GetWebDataDetailByFilter(SearchFilterModel searchFilter, WebSiteParameterAbstract webSiteParameter)
+        public async Task<WebDataDTO> GetWebDataDetailByFilter(SearchFilterModel searchFilter, WebSiteSetupDTO webSiteSetup)
         {
             if(!searchFilter.IsHardSearch)
             {
-                webSiteParameter.PageScratchService = new StaticPageScratchService();
+                webSiteSetup.PageScratchService = new StaticPageScratchService();
             }
 
             return new WebDataDTO()
             {
-                WebSiteName = webSiteParameter.WebSiteName,
-                Data = await webSiteParameter.PageScratchService.GetWebData(GetWebUrl(webSiteParameter, searchFilter)),
+                WebSiteName = webSiteSetup.WebSiteName,
+                Data = await webSiteSetup.PageScratchService.GetWebData(GetWebUrl(webSiteSetup, searchFilter)),
             };
         }
 
-        private string GetWebUrl(WebSiteParameterAbstract webSiteParameter, SearchFilterModel searchFilter)
+        private string GetWebUrl(WebSiteSetupDTO webSiteSetup, SearchFilterModel searchFilter)
         {
-            return webSiteParameter.SearchFilterService.GetFilterUrl(webSiteParameter.PriceFilterService, searchFilter);
+            return webSiteSetup.SearchFilterService.GetFilterUrl(webSiteSetup.PriceFilterService, searchFilter);
         }
     }
 }

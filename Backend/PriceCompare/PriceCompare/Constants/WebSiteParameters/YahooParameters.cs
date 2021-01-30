@@ -10,10 +10,10 @@ namespace PriceCompare.Constants.WebSiteParameters
         public YahooParameters()
         {
             WebSiteName = WebSiteNames.Yahoo;
-            PageScratchService = new StaticPageScratchService();
-            PriceFilterService = new CommomPriceFilterService();
-            SearchFilterService = new YahooSearchFilterService();
-            DataAnalysisService = new YahooDataAnalysisService();
+            WebSitePageType = WebSitePageTypes.StaticPage;
+            PriceFilterType = PriceFilterTypes.Common;
+            SearchFilterType = SearchFilterTypes.Exclusive;
+            DataAnalysisType = DataAnalysisTypes.Exclusive;
         }
     }
 }
