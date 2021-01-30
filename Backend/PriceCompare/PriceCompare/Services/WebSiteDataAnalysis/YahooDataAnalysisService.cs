@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Services.WebSiteDataAnalysis
 {
-    public class YahooDataAnalysisServicecs : IDataAnalysisService
+    public class YahooDataAnalysisService : IDataAnalysisService
     {
         public async Task<List<ProductViewModel>> AnalysisProductData(string webData)
         {

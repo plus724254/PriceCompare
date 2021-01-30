@@ -12,17 +12,12 @@ namespace PriceCompare.Services.SearchFilter
     public class PChomeSearchFilterService : ISearchFilterService
     {
         private const string _searchPrefixUrl = "https://ecshweb.pchome.com.tw/search/v3.3/all/results?page=1&sort=sale/dc&q=";
-        private readonly IPriceFilterFactory _priceFilterFactory;
-        public PChomeSearchFilterService(IPriceFilterFactory priceFilterFactory)
-        {
-            _priceFilterFactory = priceFilterFactory;
-        }
 
-        public string GetFilterUrl(SearchFilterModel searchFilter)
+        public string GetFilterUrl(IPriceFilterService priceFilterService, SearchFilterModel searchFilter)
         {
             var searchUrl = _searchPrefixUrl;
             searchUrl += searchFilter.Keyword;
-            searchUrl += _priceFilterFactory.GetPriceFilterService(WebSiteNames.PChome).GetPriceFilter(new PriceFilterDTO
+            searchUrl += priceFilterService.GetPriceFilter(new PriceFilterDTO
             {
                 MinPrice = searchFilter.MinPrice,
                 MaxPrice = searchFilter.MaxPrice,

@@ -15,17 +15,11 @@ namespace PriceCompare.Services.SearchFilter
         private const string _minPriceText = "_advPriceS";
         private const string _maxPriceText = "_advPriceE";
 
-        private readonly IPriceFilterFactory _priceFilterFactory;
-        public MoMoSearchFilterService(IPriceFilterFactory priceFilterFactory)
-        {
-            _priceFilterFactory = priceFilterFactory;
-        }
-
-        public string GetFilterUrl(SearchFilterModel searchFilter)
+        public string GetFilterUrl(IPriceFilterService priceFilterService, SearchFilterModel searchFilter)
         {
             var searchUrl = _searchPrefixUrl;
             searchUrl += searchFilter.Keyword;
-            searchUrl += _priceFilterFactory.GetPriceFilterService(WebSiteNames.MoMo).GetPriceFilter(new PriceFilterDTO
+            searchUrl += priceFilterService.GetPriceFilter(new PriceFilterDTO
             {
                 MinPriceWord = _minPriceText,
                 MaxPriceWord = _maxPriceText,

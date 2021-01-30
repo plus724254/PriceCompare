@@ -32,13 +32,8 @@ namespace PriceCompare
         {
             services.AddControllers();
 
-            services.AddScoped<IPageScratchFactory, PageScratchFactory>();
-            services.AddScoped<IPriceFilterFactory, PriceFilterFactory>();
             services.AddScoped<IProductScratchService, ProductScratchService>();
-            services.AddScoped<ISearchFilterFactory, SearchFilterFactory>();
             services.AddScoped<IWebScratchService, WebScratchService>();
-            services.AddScoped<IWebSiteDataAnalysisFactory, WebSiteDataAnalysisFactory>();
-            services.AddScoped<IWebSiteDataAnalysisService, WebSiteDataAnalysisService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,34 +1,15 @@
-﻿using PriceCompare.Constants.Enums;
-using PriceCompare.Models.DTO;
-using System;
+﻿using PriceCompare.Constants.WebSiteParameters;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PriceCompare.Constants
 {
     public static class WebSiteInfo
     {
-        public static readonly List<WebSiteDTO> WebSites = new List<WebSiteDTO>
+        public static readonly List<WebSiteParameterAbstract> WebSites = new List<WebSiteParameterAbstract>
         {
-            new WebSiteDTO()
-            {
-                Name = WebSiteNames.MoMo,
-                DataType = WebSiteDataTypes.Html,
-                PageType = WebSitePageTypes.DynamicPage,
-            },
-            new WebSiteDTO()
-            {
-                Name = WebSiteNames.PChome,
-                DataType = WebSiteDataTypes.Json,
-                PageType = WebSitePageTypes.StaticPage,
-            },
-            new WebSiteDTO()
-            {
-                Name = WebSiteNames.Yahoo,
-                DataType = WebSiteDataTypes.Html,
-                PageType = WebSitePageTypes.StaticPage,
-            },
+            new MoMoParameters(),
+            new PChomeParameters(),
+            new YahooParameters(),
         };
     }
 }
