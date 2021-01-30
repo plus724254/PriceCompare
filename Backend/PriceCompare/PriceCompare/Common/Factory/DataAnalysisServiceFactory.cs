@@ -14,7 +14,7 @@ namespace PriceCompare.Common.Factory
         private static readonly List<Type> _types;
         static DataAnalysisServiceFactory()
         {
-            _types = TypeHelper.GetImplementTypesFromInterface(typeof(IDataAnalysisService));
+            _types = TypeHelper.GetImplementTypesFromBaseType(typeof(IDataAnalysisService));
         }
         public static IDataAnalysisService CreateInstance(DataAnalysisTypes dataAnalysisType, WebSiteNames webSiteName)
         {

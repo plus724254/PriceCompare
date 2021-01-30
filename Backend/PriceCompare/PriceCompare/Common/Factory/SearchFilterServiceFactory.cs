@@ -14,7 +14,7 @@ namespace PriceCompare.Common.Factory
         private static readonly List<Type> _types;
         static SearchFilterServiceFactory()
         {
-            _types = TypeHelper.GetImplementTypesFromInterface(typeof(ISearchFilterService));
+            _types = TypeHelper.GetImplementTypesFromBaseType(typeof(ISearchFilterService));
         }
 
         public static ISearchFilterService CreateInstance(SearchFilterTypes searchFilterType, WebSiteNames webSiteName)

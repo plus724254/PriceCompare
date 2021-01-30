@@ -2,6 +2,7 @@
 using PriceCompare.Common.Factory;
 using PriceCompare.Constants.Enums;
 using PriceCompare.Constants.WebSiteParameters;
+using PriceCompare.Helpers;
 using PriceCompare.Services.Scratch;
 using PriceCompare.Services.SearchFilter;
 using PriceCompare.Services.SearchFilter.PriceFilter;
@@ -23,12 +24,11 @@ namespace PriceCompare.Services.Common
 
         private static List<WebSiteSetupDTO> InitializeWebSiteSetup()
         {
-            var webSiteParameters = new List<WebSiteParameterAbstract>()
-            {
-                new MoMoParameters(),
-                new PChomeParameters(),
-                new YahooParameters(),
-            };
+            var webSiteParameters = TypeHelper
+                .GetImplementTypesFromBaseType(typeof(WebSiteParameterAbstract))
+                .Where(x => !x.Name.Contains("Abstract"))
+                .Select(x => TypeHelper.CreateInstanceByType<WebSiteParameterAbstract>(x))
+                .ToList();
 
             var webSiteSetups = new List<WebSiteSetupDTO>();
 

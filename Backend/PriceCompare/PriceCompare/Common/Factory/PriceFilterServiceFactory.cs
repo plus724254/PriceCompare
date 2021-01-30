@@ -13,7 +13,7 @@ namespace PriceCompare.Common.Factory
         private static readonly List<Type> _types;
         static PriceFilterServiceFactory()
         {
-            _types = TypeHelper.GetImplementTypesFromInterface(typeof(IPriceFilterService));
+            _types = TypeHelper.GetImplementTypesFromBaseType(typeof(IPriceFilterService));
         }
         public static IPriceFilterService CreateInstance(PriceFilterTypes priceFilterType, WebSiteNames webSiteName)
         {

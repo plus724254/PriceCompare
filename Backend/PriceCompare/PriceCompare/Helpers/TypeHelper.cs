@@ -8,17 +8,17 @@ namespace PriceCompare.Helpers
 {
     public static class TypeHelper
     {
-        public static List<Type> GetImplementTypesFromInterface(Type @interface)
+        public static List<Type> GetImplementTypesFromBaseType(Type type)
         {
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
-                .Where(p => @interface.IsAssignableFrom(p))
+                .Where(p => type.IsAssignableFrom(p))
                 .ToList();
         }
 
-        public static List<(string AssemblyName, string Name)> GetImplementNamesFromInterface(Type @interface)
+        public static List<(string AssemblyName, string Name)> GetImplementNamesFromBaseType(Type type)
         {
-            return GetImplementTypesFromInterface(@interface)
+            return GetImplementTypesFromBaseType(type)
                 .Select(x => (x.Assembly.GetName().Name, x.Name))
                 .ToList();
         }
