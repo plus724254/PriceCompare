@@ -26,7 +26,7 @@ namespace PriceCompare.Services.Common
         {
             var webSiteParameters = TypeHelper
                 .GetImplementTypesFromBaseType(typeof(WebSiteParameterAbstract))
-                .Where(x => !x.Name.Contains("Abstract"))
+                .Where(x => !x.Name.EndsWith("Abstract"))
                 .Select(x => TypeHelper.CreateInstanceByType<WebSiteParameterAbstract>(x))
                 .ToList();
 
