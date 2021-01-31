@@ -1,4 +1,6 @@
 ﻿using PriceCompare.Common;
+using PriceCompare.Common.Factory;
+using PriceCompare.Constants.Enums;
 using PriceCompare.Constants.WebSiteParameters;
 using PriceCompare.Models;
 using PriceCompare.Models.DTO;
@@ -13,7 +15,7 @@ namespace PriceCompare.Services
         {
             if(!searchFilter.IsHardSearch)
             {
-                webSiteSetup.PageScratchService = new StaticPageScratchService();
+                webSiteSetup.PageScratchService = PageScratchServiceFactory.CreateInstance(WebSitePageTypes.StaticPage);
             }
 
             return new WebDataDTO()
