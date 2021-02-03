@@ -13,15 +13,12 @@ namespace PriceCompare.Services
     {
         public async Task<WebDataDTO> GetWebDataDetailByFilter(SearchFilterModel searchFilter, WebSiteSetupDTO webSiteSetup)
         {
-            if(!searchFilter.IsHardSearch)
-            {
-                webSiteSetup.PageScratchService = PageScratchServiceFactory.CreateInstance(WebSitePageTypes.StaticPage);
-            }
-
             return new WebDataDTO()
             {
                 WebSiteName = webSiteSetup.WebSiteName,
-                Data = await webSiteSetup.PageScratchService.GetWebData(GetWebUrl(webSiteSetup, searchFilter)),
+                Data = searchFilter.IsHardSearch?
+                    await webSiteSetup.PageScratchService.GetWebData(GetWebUrl(webSiteSetup, searchFilter))
+                    : await PageScratchServiceFactory.CreateInstance(WebSitePageTypes.StaticPage).GetWebData(GetWebUrl(webSiteSetup, searchFilter))
             };
         }
 
