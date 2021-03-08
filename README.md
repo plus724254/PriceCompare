@@ -25,7 +25,7 @@
 ```console
 flutter build apk
 ```
-安裝後即可使用，預設使用此專案Azure App Service提供的爬蟲WEB API
+安裝後即可使用，此專案後端WEB API架設於Azure App Service免費伺服器。
 
 # 項目負責人
 [@plus724254](https://github.com/plus724254)
