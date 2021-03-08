@@ -11,7 +11,6 @@
 # 項目簡介
 
 為IOS、Android系統開發的比價APP，特性為即時爬蟲抓取當下最新之商品資訊，並進行排列與提供購買連結  
-目前僅Android版本可用
   
 <img src="https://i.imgur.com/1Q67IvF.png" width="227" height="492"/>
 
