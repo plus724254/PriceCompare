@@ -18,7 +18,7 @@ namespace PriceCompare.Services.WebSiteDataAnalysis
         {
             try
             {
-                var pchomeData = await Task.Run(() => JsonSerializer.Deserialize<PChomeDataDTO>(webData));
+                var pchomeData = await Task.FromResult(JsonSerializer.Deserialize<PChomeDataDTO>(webData));
 
                 return pchomeData.prods.Select(x => new ProductViewModel()
                 {

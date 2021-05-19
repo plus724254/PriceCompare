@@ -15,7 +15,7 @@ namespace PriceCompare.Services.Scratch
 
             if (responseMessage.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return responseMessage.Content.ReadAsStringAsync().Result;//取得內容
+                return await responseMessage.Content.ReadAsStringAsync();//取得內容
             }
             else
             {
