@@ -14,15 +14,30 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Services.Common
 {
-    public static class WebSiteInitialize
+    public class WebSiteInitialize
     {
-        public static List<WebSiteSetupDTO> WebSiteSetups { get; }
-        static WebSiteInitialize()
+        public List<WebSiteSetupDTO> WebSiteSetups { get; }
+
+        private readonly IPageScratchServiceFactory _pageScratchServiceFactory;
+        private readonly IPriceFilterServiceFactory _priceFilterServiceFactory;
+        private readonly ISearchFilterServiceFactory _searchFilterServiceFactory;
+        private readonly IDataAnalysisServiceFactory _dataAnalysisServiceFactory;
+
+        public WebSiteInitialize(
+            IPageScratchServiceFactory pageScratchServiceFactory,
+            IPriceFilterServiceFactory priceFilterServiceFactory,
+            ISearchFilterServiceFactory searchFilterServiceFactory,
+            IDataAnalysisServiceFactory dataAnalysisServiceFactory)
         {
+            _pageScratchServiceFactory = pageScratchServiceFactory;
+            _priceFilterServiceFactory = priceFilterServiceFactory;
+            _searchFilterServiceFactory = searchFilterServiceFactory;
+            _dataAnalysisServiceFactory = dataAnalysisServiceFactory;
+
             WebSiteSetups = InitializeWebSiteSetup();
         }
 
-        private static List<WebSiteSetupDTO> InitializeWebSiteSetup()
+        private List<WebSiteSetupDTO> InitializeWebSiteSetup()
         {
             var webSiteParameters = TypeHelper
                 .GetImplementTypesFromBaseType(typeof(WebSiteParameterAbstract))
@@ -37,10 +52,10 @@ namespace PriceCompare.Services.Common
                 var webSiteSetup = new WebSiteSetupDTO()
                 {
                     WebSiteName = webSiteParameter.WebSiteName,
-                    PageScratchService = PageScratchServiceFactory.CreateInstance(webSiteParameter.WebSitePageType),
-                    PriceFilterService = PriceFilterServiceFactory.CreateInstance(webSiteParameter.PriceFilterType, webSiteParameter.WebSiteName),
-                    SearchFilterService = SearchFilterServiceFactory.CreateInstance(webSiteParameter.SearchFilterType, webSiteParameter.WebSiteName),
-                    DataAnalysisService = DataAnalysisServiceFactory.CreateInstance(webSiteParameter.DataAnalysisType, webSiteParameter.WebSiteName),
+                    PageScratchService = _pageScratchServiceFactory.CreateInstance(webSiteParameter.WebSitePageType),
+                    PriceFilterService = _priceFilterServiceFactory.CreateInstance(webSiteParameter.PriceFilterType, webSiteParameter.WebSiteName),
+                    SearchFilterService = _searchFilterServiceFactory.CreateInstance(webSiteParameter.SearchFilterType, webSiteParameter.WebSiteName),
+                    DataAnalysisService = _dataAnalysisServiceFactory.CreateInstance(webSiteParameter.DataAnalysisType, webSiteParameter.WebSiteName),
                 };
 
                 webSiteSetups.Add(webSiteSetup);
@@ -48,6 +63,5 @@ namespace PriceCompare.Services.Common
 
             return webSiteSetups;
         }
-
     }
 }

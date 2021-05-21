@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Common.Factory
 {
-    public static class SearchFilterServiceFactory
+    public class SearchFilterServiceFactory : ISearchFilterServiceFactory
     {
-        private static readonly List<Type> _types;
-        static SearchFilterServiceFactory()
+        private readonly List<Type> _types;
+        public SearchFilterServiceFactory()
         {
             _types = TypeHelper.GetImplementTypesFromBaseType(typeof(ISearchFilterService));
         }
 
-        public static ISearchFilterService CreateInstance(SearchFilterTypes searchFilterType, WebSiteNames webSiteName)
+        public ISearchFilterService CreateInstance(SearchFilterTypes searchFilterType, WebSiteNames webSiteName)
         {
             switch (searchFilterType)
             {

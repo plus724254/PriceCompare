@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Common.Factory
 {
-    public static class PriceFilterServiceFactory
+    public class PriceFilterServiceFactory : IPriceFilterServiceFactory
     {
-        private static readonly List<Type> _types;
-        static PriceFilterServiceFactory()
+        private readonly List<Type> _types;
+        public PriceFilterServiceFactory()
         {
             _types = TypeHelper.GetImplementTypesFromBaseType(typeof(IPriceFilterService));
         }
-        public static IPriceFilterService CreateInstance(PriceFilterTypes priceFilterType, WebSiteNames webSiteName)
+        public IPriceFilterService CreateInstance(PriceFilterTypes priceFilterType, WebSiteNames webSiteName)
         {
             switch (priceFilterType)
             {

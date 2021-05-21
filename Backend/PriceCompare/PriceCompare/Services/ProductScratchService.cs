@@ -13,17 +13,19 @@ namespace PriceCompare.Services
     public class ProductScratchService : IProductScratchService
     {
         private readonly IWebScratchService _webScratchService;
+        private readonly WebSiteInitialize _webSiteInitialize;
 
-        public ProductScratchService(IWebScratchService webScratchService)
+        public ProductScratchService(IWebScratchService webScratchService, WebSiteInitialize webSiteInitialize)
         {
             _webScratchService = webScratchService;
+            _webSiteInitialize = webSiteInitialize;
         }
 
         public async Task<List<ProductViewModel>> GetProducts(SearchFilterModel searchFilter)
         {
             var productViewModels = new List<ProductViewModel>();
 
-            var tasks = WebSiteInitialize.WebSiteSetups.Select(async x =>
+            var tasks = _webSiteInitialize.WebSiteSetups.Select(async x =>
             {
                 productViewModels.AddRange(await GetProductsBySingleWebSite(searchFilter, x));
             });

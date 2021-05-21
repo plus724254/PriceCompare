@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace PriceCompare.Common.Factory
 {
-    public static class DataAnalysisServiceFactory
+    public class DataAnalysisServiceFactory : IDataAnalysisServiceFactory
     {
-        private static readonly List<Type> _types;
-        static DataAnalysisServiceFactory()
+        private readonly List<Type> _types;
+        public DataAnalysisServiceFactory()
         {
             _types = TypeHelper.GetImplementTypesFromBaseType(typeof(IDataAnalysisService));
         }
-        public static IDataAnalysisService CreateInstance(DataAnalysisTypes dataAnalysisType, WebSiteNames webSiteName)
+        public IDataAnalysisService CreateInstance(DataAnalysisTypes dataAnalysisType, WebSiteNames webSiteName)
         {
             switch (dataAnalysisType)
             {
