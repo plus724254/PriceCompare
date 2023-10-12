@@ -1,11 +1,10 @@
-﻿using AngleSharp.Dom;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AngleSharp.Dom;
 using PriceCompare.Constants.Enums;
 using PriceCompare.Helpers;
 using PriceCompare.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PriceCompare.Services.WebSiteDataAnalysis
 {
@@ -18,16 +17,16 @@ namespace PriceCompare.Services.WebSiteDataAnalysis
                 var document = await HtmlAnalysisHelper.GetDocument(webData);
 
                 var products = document
-                    .QuerySelectorAll(".gridList > .BaseGridItem__grid___2wuJ7")
+                    .QuerySelectorAll(".ResultList_resultList_IpWJt > .gridList > .sc-1drl28c-1")
                     .Select(x => new ProductViewModel()
-                    {
-                        ImageUrl = x.QuerySelector(".SquareImg_img_2gAcq").GetAttribute("srcset")?.Split(" ")[0],
-                        PageUrl = x.QuerySelector("a").GetAttribute("href"),
-                        WebSiteName = nameof(WebSiteNames.Yahoo),
-                        Name = x.QuerySelector(".BaseGridItem__title___2HWui").InnerHtml?.Trim(),
-                        Detail = string.Empty,
-                        Price = GetPrice(x),
-                    })
+                     {
+                         ImageUrl = x.QuerySelector(".sc-1mbu11z-0")?.GetAttribute("src"),
+                         PageUrl = x?.GetAttribute("href"),
+                         WebSiteName = nameof(WebSiteNames.Yahoo),
+                         Name = x.QuerySelector(".sc-1drl28c-4 > span")?.InnerHtml?.Trim(),
+                         Detail = string.Empty,
+                         Price = GetPrice(x),
+                     })
                     .ToList();
 
                 return products;
@@ -40,16 +39,16 @@ namespace PriceCompare.Services.WebSiteDataAnalysis
 
         private int GetPrice(IElement element)
         {
-            var scratchPrice = WebDataConvertHelper.WebPriceToNumber(element.QuerySelector(".BaseGridItem__price___31jkj").InnerHtml);
+            var scratchPrice = WebDataConvertHelper.WebPriceToNumber(element.QuerySelector(".sc-1ap2njs-0 .sc-1d7r8jg-0").InnerHtml);
 
-            if(scratchPrice != 0)
-            {
+            //if(scratchPrice != 0)
+            //{
                 return scratchPrice;
-            }
-            else
-            {
-                return WebDataConvertHelper.WebPriceToNumber(element.QuerySelector(".BaseGridItem__price___31jkj > em").InnerHtml);
-            }
+            //}
+            //else
+            //{
+            //    return WebDataConvertHelper.WebPriceToNumber(element.QuerySelector(".BaseGridItem__price___31jkj > em").InnerHtml);
+            //}
         }
     }
 }
