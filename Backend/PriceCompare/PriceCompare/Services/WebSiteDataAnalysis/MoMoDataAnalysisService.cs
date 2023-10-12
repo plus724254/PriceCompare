@@ -20,7 +20,7 @@ namespace PriceCompare.Services.WebSiteDataAnalysis
                     .QuerySelectorAll(".goodsItemLi")
                     .Select(x => new ProductViewModel()
                     {
-                        ImageUrl = x.QuerySelector(".prdImgWrap .goodsImg")?.GetAttribute("src") ?? string.Empty,
+                        ImageUrl = x.QuerySelector(".prdImgWrap .goodsImg")?.GetAttribute("data-original") ?? string.Empty,
                         PageUrl = $"{_pagePrefix}{x.QuerySelector("a").GetAttribute("href")}",
                         WebSiteName = nameof(WebSiteNames.MoMo),
                         Name = x.QuerySelector(".prdInfoWrap .prdName")?.InnerHtml?.Trim(),
