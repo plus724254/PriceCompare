@@ -1,18 +1,16 @@
-﻿using System.Text.Json;
-using PriceCompare.Helpers;
-using PriceCompare.Models.DTO.Web;
-using PriceCompare.ViewModels;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using PriceCompare.Constants.Enums;
+using PriceCompare.Models.DTO.Web;
+using PriceCompare.ViewModels;
 
 namespace PriceCompare.Services.WebSiteDataAnalysis
 {
     public class PChomeDataAnalysisService : IDataAnalysisService
     {
-        private const string _imagePrefix = "https://b.ecimg.tw/";
+        private const string _imagePrefix = "https://cs-b.ecimg.tw/";
         private const string _pagePrefix = "https://24h.pchome.com.tw/prod/";
         public async Task<List<ProductViewModel>> AnalysisProductData(string webData)
         {

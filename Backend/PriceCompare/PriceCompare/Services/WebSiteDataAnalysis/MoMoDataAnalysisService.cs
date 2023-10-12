@@ -1,10 +1,9 @@
-﻿using PriceCompare.Constants.Enums;
-using PriceCompare.Helpers;
-using PriceCompare.ViewModels;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PriceCompare.Constants.Enums;
+using PriceCompare.Helpers;
+using PriceCompare.ViewModels;
 
 namespace PriceCompare.Services.WebSiteDataAnalysis
 {
@@ -21,10 +20,10 @@ namespace PriceCompare.Services.WebSiteDataAnalysis
                     .QuerySelectorAll(".goodsItemLi")
                     .Select(x => new ProductViewModel()
                     {
-                        ImageUrl = x.QuerySelector(".prdImgWrap img")?.GetAttribute("src") ?? string.Empty,
+                        ImageUrl = x.QuerySelector(".prdImgWrap .goodsImg")?.GetAttribute("src") ?? string.Empty,
                         PageUrl = $"{_pagePrefix}{x.QuerySelector("a").GetAttribute("href")}",
                         WebSiteName = nameof(WebSiteNames.MoMo),
-                        Name = x.QuerySelector(".prdInfoWrap > .prdName").InnerHtml?.Trim(),
+                        Name = x.QuerySelector(".prdInfoWrap .prdName")?.InnerHtml?.Trim(),
                         Detail = string.Empty,
                         Price = WebDataConvertHelper.WebPriceToNumber(x.QuerySelector(".priceSymbol > .price").InnerHtml),
                     })
